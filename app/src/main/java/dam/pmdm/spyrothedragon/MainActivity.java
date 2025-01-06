@@ -1,9 +1,11 @@
 package dam.pmdm.spyrothedragon;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -58,6 +60,32 @@ public class MainActivity extends AppCompatActivity {
             navController.navigate(R.id.navigation_collectibles);
         return true;
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Infla el menú
+        getMenuInflater().inflate(R.menu.about_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Gestiona el clic en el ítem de información
+        if (item.getItemId() == R.id.action_info) {
+            showInfoDialog();  // Muestra el diálogo
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showInfoDialog() {
+        // Crear un diálogo de información
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_about)
+                .setMessage(R.string.text_about)
+                .setPositiveButton(R.string.accept, null)
+                .show();
     }
 
 
