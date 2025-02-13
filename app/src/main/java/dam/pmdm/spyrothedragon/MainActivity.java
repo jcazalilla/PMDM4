@@ -1,8 +1,10 @@
 package dam.pmdm.spyrothedragon;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -13,11 +15,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
+import dam.pmdm.spyrothedragon.databinding.GuideBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     NavController navController = null;
+    private GuideBinding guideBinding;
+
+    private boolean needToStartGuide = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +47,57 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.navigation_collectibles) {
                 // Para las pantallas de los tabs, no queremos que aparezca la flecha de atrás
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            }
-            else {
+            } else {
                 // Si se navega a una pantalla donde se desea mostrar la flecha de atrás, habilítala
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         });
 
+        initializeGuide();
+
     }
+
+    //inicia guia
+    private void initializeGuide() {
+        guideBinding.exitGuide.setOnClickListener(this::onExitGuide);
+
+        if (needToStartGuide) {
+            //bloqueamos bottom navigation
+            binding.navView.setClickable(false);
+            binding.navView.setFocusable(false);
+            binding.navView.setEnabled(false);
+            //hacemos visible la guia
+            guideBinding.guideLayout.setVisibility(View.VISIBLE);
+        }
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(
+                guideBinding.pulseImage, "scaleX",1f,.5f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(
+                guideBinding.pulseImage,"scaleY", 1f,0.5f);
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
+                guideBinding.textStep,"alpha",0f,1f);
+    }
+
+
+    private void onExitGuide(View view) {
+
+        //hacemos invisible la guia
+        guideBinding.guideLayout.setVisibility(View.GONE);
+
+        //Desbloqueamos bottom navigation
+        binding.navView.setClickable(true);
+        binding.navView.setFocusable(true);
+        binding.navView.setEnabled(true);
+
+        needToStartGuide = false;
+
+
+    }
+
 
     private boolean selectedBottomMenu(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_characters)
             navController.navigate(R.id.navigation_characters);
-        else
-        if (menuItem.getItemId() == R.id.nav_worlds)
+        else if (menuItem.getItemId() == R.id.nav_worlds)
             navController.navigate(R.id.navigation_worlds);
         else
             navController.navigate(R.id.navigation_collectibles);
@@ -87,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.accept, null)
                 .show();
     }
-
 
 
 }

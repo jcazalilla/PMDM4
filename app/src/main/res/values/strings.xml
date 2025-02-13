@@ -6,4 +6,6 @@
     <string name="title_about">Acerca de</string>
     <string name="text_about">Aplicación desarrollada por \n <b>Lindsay Barrero Martínez.</b></string>
     <string name="accept">Aceptar</string>
+    <string name="salir_de_la_guia">Salir de la guia</string>
+    <string name="mundos_de_spyro">En esta opción encontrarás los mundos de Spyro</string>
 </resources>
