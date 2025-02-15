@@ -1,4 +1,5 @@
 <resources>
+    <!--textos iniciales, autor:profe-->
     <string name="app_name">SpyroTheDragon</string>
     <string name="worlds">Mundos</string>
     <string name="characters">Personajes</string>
@@ -6,6 +7,17 @@
     <string name="title_about">Acerca de</string>
     <string name="text_about">Aplicación desarrollada por \n <b>Lindsay Barrero Martínez.</b></string>
     <string name="accept">Aceptar</string>
+
+
+    <!--pantalla bienvenida-->
+    <string name="title_bienvenida">BIENVENIDO</string>
+    <string name="frase_comienzo">Estás a punto de entrar en el apasionante mundo de <b>&quot;Spyro the Dragon&quot;</b></string>
+    <string name="pregunta_entrar">¿Preparado para entrar?</string>
+    <string name="comenzar_guia">Comenzar</string>
+
+    <!--de la guia-->
     <string name="salir_de_la_guia">Salir de la guia</string>
     <string name="mundos_de_spyro">En esta opción encontrarás los mundos de Spyro</string>
+    <string name="personajes_de_spyro">Personajes de Spyro</string>
+    <string name="texto_info_comienzo">Pulsa <b>comenzar</b> para ser tu guia en el mundo de Spyro</string>
 </resources>

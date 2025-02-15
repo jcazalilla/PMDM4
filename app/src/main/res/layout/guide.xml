@@ -9,38 +9,38 @@
     android:focusable="true"
     android:visibility="visible">
 
-    <ImageView
-        android:id="@+id/pulseImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="-90dp"
-        android:layout_marginTop="600dp"
-        app:constraintStart_toStartOf="parent"
-        android:src="@drawable/pulse"/>
-    <TextView
-        android:id="@+id/textStep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mundos_de_spyro"
-        android:background="@drawable/button_personalized"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="26dp"
-        android:maxLines="3"
-        android:textColor="@color/purple"
-        android:alpha="0"/>
-
     <android.widget.Button
         android:id="@+id/exitGuide"
-        android:layout_width="139dp"
+        android:layout_width="127dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="right|top|end"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/white_trasparent"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
         android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textStep"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:background="@drawable/boton_normal"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="@string/personajes_de_spyro"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <ImageView
+        android:id="@+id/pulseImage"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="-80dp"
+        android:layout_marginTop="550dp"
+        android:src="@drawable/pulse" />
 
 
 </FrameLayout>

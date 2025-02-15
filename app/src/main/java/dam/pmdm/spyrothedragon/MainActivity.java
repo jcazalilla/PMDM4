@@ -1,6 +1,10 @@
 package dam.pmdm.spyrothedragon;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
+import dam.pmdm.spyrothedragon.databinding.BienvenidaBinding;
 import dam.pmdm.spyrothedragon.databinding.GuideBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     NavController navController = null;
     private GuideBinding guideBinding;
+    private BienvenidaBinding bienvenidaBinding;
 
     private boolean needToStartGuide = true;
 
@@ -30,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        //inicializamos guide layout para manejarlo
+        guideBinding=binding.includeLayout;
         setContentView(binding.getRoot());
 
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
@@ -53,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        
         initializeGuide();
 
     }
 
+
+
     //inicia guia
     private void initializeGuide() {
         guideBinding.exitGuide.setOnClickListener(this::onExitGuide);
-
         if (needToStartGuide) {
             //bloqueamos bottom navigation
             binding.navView.setClickable(false);
@@ -70,25 +80,29 @@ public class MainActivity extends AppCompatActivity {
             guideBinding.guideLayout.setVisibility(View.VISIBLE);
         }
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage, "scaleX",1f,.5f);
+                guideBinding.pulseImage, "scaleX", 1f, .5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage,"scaleY", 1f,0.5f);
+                guideBinding.pulseImage, "scaleY", 1f, 0.5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
-                guideBinding.textStep,"alpha",0f,1f);
+                guideBinding.textStep, "alpha", 0f, 1f);
     }
 
 
     private void onExitGuide(View view) {
 
-        //hacemos invisible la guia
-        guideBinding.guideLayout.setVisibility(View.GONE);
+        needToStartGuide = false;
 
         //Desbloqueamos bottom navigation
         binding.navView.setClickable(true);
         binding.navView.setFocusable(true);
         binding.navView.setEnabled(true);
 
-        needToStartGuide = false;
+        //hacemos invisible la guia
+        guideBinding.guideLayout.setVisibility(View.INVISIBLE);
+
+
+
+
 
 
     }
