@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bienvenida"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/drip"
         android:gravity="center"
         android:text="@string/title_bienvenida"
@@ -18,13 +21,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="106dp" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/bashemath"
         android:gravity="center_horizontal"
         android:padding="15dp"
@@ -34,12 +37,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="191dp" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="335dp"
         android:layout_height="38dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/bashemath"
         android:gravity="center"
         android:text="@string/pregunta_entrar"
@@ -48,24 +52,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="325dp" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="217dp"
         android:layout_height="147dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/spyro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/buttonStartGuide"
-        android:layout_width="411dp"
-        android:layout_height="30dp"
+        android:layout_width="351dp"
+        android:layout_height="53dp"
         android:layout_margin="15dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/bashemath"
         android:gravity="center"
         android:text="@string/texto_info_comienzo"
@@ -73,12 +78,12 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="546dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/imgStart"
-        android:layout_width="227dp"
-        android:layout_height="39dp"
+        android:layout_width="234dp"
+        android:layout_height="52dp"
         android:layout_margin="42dp"
         android:fontFamily="@font/bashemath"
         android:gravity="center"
@@ -88,9 +93,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.528" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartGuide"
+        app:layout_constraintVertical_bias="0.22" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

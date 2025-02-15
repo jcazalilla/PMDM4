@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/guideLayout"
+    android:id="@+id/guidePersonajesLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange_trasparent"
+    android:background="@color/blue_transparent"
     android:clickable="true"
     android:focusable="true"
     android:visibility="visible">
 
     <android.widget.Button
-        android:id="@+id/exitGuide"
+        android:id="@+id/nextToMundos"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top|end"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:background="@color/white_trasparent"
-        android:text="@string/salir_de_la_guia"
+        android:text="@string/ir_a_mundos"
         android:textAllCaps="false"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/textStep"
-        android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_width="376dp"
+        android:layout_height="228dp"
         android:layout_gravity="center"
         android:alpha="0"
-        android:background="@drawable/boton_normal"
+        android:background="@drawable/fondo_textview"
         android:gravity="center"
-        android:maxLines="3"
         android:text="@string/personajes_de_spyro"
         android:textColor="@color/black"
-        android:textSize="26sp" />
+        android:textSize="22sp" />
 
     <ImageView
-        android:id="@+id/pulseImage"
+        android:id="@+id/pulseImagePersonajes"
         android:layout_width="250dp"
         android:layout_height="200dp"
-        android:layout_marginStart="-80dp"
+        android:layout_marginStart="-100dp"
         android:layout_marginTop="550dp"
         android:src="@drawable/pulse" />
 

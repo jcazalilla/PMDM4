@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.widget.Button
+        android:id="@+id/nextToResumen"
+        android:layout_width="128dp"
+        android:layout_height="49dp"
+        android:layout_gravity="right|top|end"
+        android:background="@color/white_trasparent"
+        android:text="@string/ir_a_resumen"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="254dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <TextView
+        android:id="@+id/textStep"
+        android:layout_width="372dp"
+        android:layout_height="275dp"
+        android:alpha="0"
+        android:background="@drawable/fondo_textview"
+        android:gravity="center"
+        android:text="@string/coleccionables_espyro"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="170dp" />
+
+    <ImageView
+        android:id="@+id/pulseImageColeccionables"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:src="@drawable/pulse"
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="610dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,10 @@
 
     <include
         android:id="@+id/includeLayout"
-        layout="@layout/guide"/>
+        layout="@layout/guide_personajes"/>
+    <!--<include
+        android:id="@+id/bienvenida"
+        layout="@layout/bienvenida"/>-->
 
 
 </RelativeLayout>

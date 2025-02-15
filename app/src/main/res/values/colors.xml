@@ -12,6 +12,8 @@
     <color name="yellow_transparent">#66fbdf6a</color>
     <color name="orange_trasparent">#33FF8F00</color>
     <color name="teal_700_transprent">#88018786</color>
+    <color name="blue_transparent">#6253A2C8</color>
+    <color name="salmon_transparente">#A3FF8A80</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -27,4 +29,6 @@
     <color name="brown">#814705</color>
     <color name="red">#f93535</color>
     <color name="blue">#457ee1</color>
+
+
 </resources>

@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation ("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

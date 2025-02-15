@@ -1,10 +1,12 @@
 package dam.pmdm.spyrothedragon;
 
-import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,16 +22,18 @@ import androidx.navigation.ui.NavigationUI;
 
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
 import dam.pmdm.spyrothedragon.databinding.BienvenidaBinding;
-import dam.pmdm.spyrothedragon.databinding.GuideBinding;
+import dam.pmdm.spyrothedragon.databinding.GuidePersonajesBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     NavController navController = null;
-    private GuideBinding guideBinding;
+    private GuidePersonajesBinding personajesBinding;
     private BienvenidaBinding bienvenidaBinding;
 
     private boolean needToStartGuide = true;
+
+    private TransitionDrawable transitionComienzo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         //inicializamos guide layout para manejarlo
-        guideBinding=binding.includeLayout;
+        personajesBinding =binding.includeLayout;
         setContentView(binding.getRoot());
 
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
@@ -61,30 +65,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        
+
+
         initializeGuide();
 
     }
 
 
 
+
     //inicia guia
     private void initializeGuide() {
-        guideBinding.exitGuide.setOnClickListener(this::onExitGuide);
+
+
+
+        personajesBinding.nextToMundos.setOnClickListener(this::onExitGuide);
+
         if (needToStartGuide) {
             //bloqueamos bottom navigation
             binding.navView.setClickable(false);
             binding.navView.setFocusable(false);
             binding.navView.setEnabled(false);
             //hacemos visible la guia
-            guideBinding.guideLayout.setVisibility(View.VISIBLE);
+            personajesBinding.guidePersonajesLayout.setVisibility(View.VISIBLE);
         }
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage, "scaleX", 1f, .5f);
+                personajesBinding.pulseImagePersonajes, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage, "scaleY", 1f, 0.5f);
+                personajesBinding.pulseImagePersonajes, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
-                guideBinding.textStep, "alpha", 0f, 1f);
+                personajesBinding.textStep, "alpha", 0f, 1f);
+
+        scaleX.setRepeatCount(3);
+        scaleY.setRepeatCount(3);
+        AnimatorSet animatorSet=new AnimatorSet();
+        animatorSet.play(scaleX).with(scaleX).before(fadeIn);
+        animatorSet.setDuration(1500);
+        animatorSet.start();
+        animatorSet.addListener((new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+               if(needToStartGuide){
+                   super.onAnimationEnd(animation);
+
+
+                   personajesBinding.pulseImagePersonajes.setVisibility(View.GONE);
+                   personajesBinding.textStep.setVisibility(VISIBLE);
+               }
+            }
+        }));
     }
 
 
@@ -98,13 +127,7 @@ public class MainActivity extends AppCompatActivity {
         binding.navView.setEnabled(true);
 
         //hacemos invisible la guia
-        guideBinding.guideLayout.setVisibility(View.INVISIBLE);
-
-
-
-
-
-
+        personajesBinding.guidePersonajesLayout.setVisibility(View.INVISIBLE);
     }
 
 
