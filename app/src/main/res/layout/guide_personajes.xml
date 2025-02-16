@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/guidePersonajesLayout"
     android:layout_width="match_parent"
@@ -9,37 +10,48 @@
     android:focusable="true"
     android:visibility="visible">
 
+
     <android.widget.Button
         android:id="@+id/nextToMundos"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top|end"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="44dp"
         android:background="@color/white_trasparent"
-        android:text="@string/ir_a_mundos"
+        android:text="@string/siguiente"
         android:textAllCaps="false"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/textStep"
-        android:layout_width="376dp"
-        android:layout_height="228dp"
-        android:layout_gravity="center"
-        android:alpha="0"
-        android:background="@drawable/fondo_textview"
-        android:gravity="center"
-        android:text="@string/personajes_de_spyro"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/pulseImagePersonajes"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="-100dp"
-        android:layout_marginTop="550dp"
-        android:src="@drawable/pulse" />
+        android:layout_width="170dp"
+        android:layout_height="219dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="224dp"
+        android:src="@drawable/pulse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textStep"
+        android:layout_width="262dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="408dp"
+        android:alpha="0"
+        android:background="@drawable/fondo_textview"
+        android:padding="15dp"
+        android:gravity="center"
+        android:text="@string/personajes_de_spyro"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

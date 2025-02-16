@@ -42,11 +42,33 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        android:id="@+id/includeLayout"
-        layout="@layout/guide_personajes"/>
-    <!--<include
-        android:id="@+id/bienvenida"
-        layout="@layout/bienvenida"/>-->
+        android:id="@+id/guideBienvenidaLayout"
+        layout="@layout/guide_bienvenida"
+        android:visibility="gone" />
 
+    <include
+        android:id="@+id/guidePersonajesLayout"
+        layout="@layout/guide_personajes"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/guideMundosLayout"
+        layout="@layout/guide_mundos"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/guideColeccionablesLayout"
+        layout="@layout/guide_coleccionables"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/guideInfoLayout"
+        layout="@layout/guide_info"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/guideResumenLayout"
+        layout="@layout/guide_resumen"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/guideColeccionablesLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue_transparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="visible">
 
 
     <android.widget.Button
@@ -10,32 +16,39 @@
         android:layout_width="128dp"
         android:layout_height="49dp"
         android:layout_gravity="right|top|end"
+        android:layout_marginTop="60dp"
         android:background="@color/white_trasparent"
-        android:text="@string/ir_a_resumen"
+        android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        tools:layout_editor_absoluteX="254dp"
-        tools:layout_editor_absoluteY="35dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textStep"
-        android:layout_width="372dp"
-        android:layout_height="275dp"
+        android:layout_width="324dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="248dp"
+        android:layout_marginEnd="44dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"
         android:text="@string/coleccionables_espyro"
         android:textColor="@color/black"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="170dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextToResumen" />
 
     <ImageView
         android:id="@+id/pulseImageColeccionables"
         android:layout_width="250dp"
         android:layout_height="200dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/pulse"
-        tools:layout_editor_absoluteX="242dp"
-        tools:layout_editor_absoluteY="610dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textStep" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

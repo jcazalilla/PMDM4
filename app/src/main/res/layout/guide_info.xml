@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_transparent"
+    android:id="@+id/guideInfoLayout"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="visible">
+
+    <ImageView
+        android:id="@+id/pulseImagePersonajes"
+        android:layout_width="75dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/pulse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textStep"
+        android:layout_width="206dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="84dp"
+        android:alpha="0"
+        android:background="@drawable/fondo_textview"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/info_desarrollador"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/nextToResumen"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top|end"
+        android:layout_marginTop="548dp"
+        android:background="@color/white_trasparent"
+        android:text="@string/siguiente"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

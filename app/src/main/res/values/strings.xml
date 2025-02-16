@@ -17,7 +17,7 @@
 
     <!--de la guia personjes-->
     <string name="salir_de_la_guia">Salir de la guia</string>
-    <string name="personajes_de_spyro">Aquí podrás explorar a todos los personajes del mundo de Spyro.</string>
+    <string name="personajes_de_spyro">Aquí podrás explorar todos los personajes del mundo de Spyro.</string>
     <string name="texto_info_comienzo">Pulsa <b>comenzar</b> para ser tu guia en el mundo de Spyro</string>
     <string name="ir_a_mundos">Ir a pantalla Mundos</string>
 
@@ -28,8 +28,21 @@
 
     <!--de la guia resumen-->
     <string name="ir_a_resumen">Ir a pantalla resumen</string>
-    <string name="coleccionables_espyro">En esta pantalla tendrás todos los coleccionables capturados.
-         Como gemas,huevos de dragón, puntos de habilidad,
-        cajas de espirtu y libélulas.</string>
+    <string name="coleccionables_espyro">Aquí tendrás todos los coleccionables capturados.
+        Como gemas,huevos de dragón, puntos de habilidad, cajas de espirtu y libélulas.</string>
+
+    <!--del resumen final-->
+    <string name="resumen_final">Resumen final</string>
+    <string name="text_row_resumen">Elementos que has visto en la guia</string>
+    <string name="row1_resumen">1.- Personajes en el mundo de Spyro</string>
+    <string name="row2_resumen">2.- Mundos de Spyro</string>
+    <string name="row3_resumen">3.- Coleccionables</string>
+    <string name="info_desarrolllador">4.- Información del desarrollador</string>
+
+
+    <!--del icono de información-->
+    <string name="info_desarrollador">Información del desarrollador</string>
+    <string name="siguiente"><![CDATA[Siguiente >>]]></string>
+
 
 </resources>

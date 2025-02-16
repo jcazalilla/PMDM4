@@ -15,34 +15,46 @@
         android:layout_width="146dp"
         android:layout_height="52dp"
         android:layout_gravity="right|top|end"
+        android:layout_marginTop="60dp"
         android:background="@color/white_trasparent"
-        android:text="@string/ir_a_coleccionables"
+        android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="33dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textStep"
-        android:layout_width="375dp"
-        android:layout_height="173dp"
+        android:layout_width="311dp"
+        android:layout_height="164dp"
         android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="292dp"
+        android:layout_marginRight="16dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"
+        android:padding="15dp"
         android:text="@string/mundos_de_spyro"
         android:textColor="@color/black"
         android:textSize="22sp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="185dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextToColeccionables" />
 
     <ImageView
         android:id="@+id/pulseImageMundos"
-        android:layout_width="247dp"
-        android:layout_height="175dp"
+        android:layout_width="264dp"
+        android:layout_height="207dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/pulse"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="612dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textStep" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
