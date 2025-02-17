@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/guidePersonajesLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,24 +11,39 @@
     android:focusable="true"
     android:visibility="visible">
 
+    <android.widget.Button
+        android:id="@+id/exitGuide"
+        android:layout_width="125dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="56dp"
+        android:background="@color/white_trasparent"
+        android:text="@string/salir_de_la_guia"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/nextToMundos"
+        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
         android:id="@+id/nextToMundos"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top|end"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="56dp"
         android:background="@color/white_trasparent"
         android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <ImageView
-        android:id="@+id/pulseImagePersonajes"
+        android:id="@+id/pulseImage"
         android:layout_width="170dp"
         android:layout_height="219dp"
         android:layout_marginTop="600dp"

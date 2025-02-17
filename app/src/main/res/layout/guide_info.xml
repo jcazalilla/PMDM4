@@ -11,11 +11,12 @@
     android:visibility="visible">
 
     <ImageView
-        android:id="@+id/pulseImagePersonajes"
+        android:id="@+id/pulseImage"
         android:layout_width="75dp"
         android:layout_height="71dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/pulse"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/pulse_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +24,7 @@
         android:id="@+id/textStep"
         android:layout_width="206dp"
         android:layout_height="124dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="132dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"
@@ -32,7 +33,22 @@
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/exitGuide"
+        android:layout_width="125dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="580dp"
+        android:background="@color/white_trasparent"
+        android:text="@string/salir_de_la_guia"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/nextToResumen"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,13 +57,13 @@
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top|end"
-        android:layout_marginTop="548dp"
+        android:layout_marginTop="580dp"
         android:background="@color/white_trasparent"
         android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
