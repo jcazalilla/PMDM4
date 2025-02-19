@@ -3,24 +3,34 @@ package dam.pmdm.spyrothedragon;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+
+import static androidx.constraintlayout.widget.ConstraintLayout.*;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-import androidx.viewbinding.ViewBinding;
 
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
 import dam.pmdm.spyrothedragon.databinding.GuideBienvenidaBinding;
@@ -43,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private GuideInfoBinding infoBinding;
     private GuideResumenBinding resumenBinding;
 
+    private ImageView imageView;
 
     private boolean needToStartGuide = true;
 
@@ -73,19 +84,15 @@ public class MainActivity extends AppCompatActivity {
         binding.navView.setOnItemSelectedListener(this::selectedBottomMenu);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.navigation_characters ||
-                    destination.getId() == R.id.navigation_worlds ||
-                    destination.getId() == R.id.navigation_collectibles) {
-                // Para las pantallas de los tabs, no queremos que aparezca la flecha de atrás
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            } else {
-                // Si se navega a una pantalla donde se desea mostrar la flecha de atrás, habilítala
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+            // Para las pantallas de los tabs, no queremos que aparezca la flecha de atrás
+            // Si se navega a una pantalla donde se desea mostrar la flecha de atrás, habilítala
+            getSupportActionBar().setDisplayHomeAsUpEnabled(destination.getId() != R.id.navigation_characters &&
+                    destination.getId() != R.id.navigation_worlds &&
+                    destination.getId() != R.id.navigation_collectibles);
         });
 
 
-        initializeBienvenida();
+        initializeGuide();
 
 
     }
@@ -101,20 +108,23 @@ public class MainActivity extends AppCompatActivity {
         return screenWidth;
     }
 
-    private void initializeBienvenida() {
-
+    private void initializeGuide() {
         getSupportActionBar().hide();//ocultamos Actionbar en la guide
-
-        bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializeGuide);
-
+        bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
         bienvenidaBinding.guidebienvenidaLayout.setVisibility(VISIBLE);
     }
 
 
     //inicia guia
-    private void initializeGuide(View view) {
+    private void initializePersonajes(View view) {
 
+        // Cargar la transición desde el recurso XML
+        Transition fade = TransitionInflater.from(MainActivity.this)
+                .inflateTransition(R.transition.fade);
+        // Iniciar la transición desde el anterior layout
+        TransitionManager.beginDelayedTransition(findViewById(R.id.guideBienvenidaLayout), fade);
 
+        //listener de los buttons
         personajesBinding.exitGuide.setOnClickListener(this::onExitGuide);
         personajesBinding.nextToMundos.setOnClickListener(this::initalizeMundos);
 
@@ -130,11 +140,10 @@ public class MainActivity extends AppCompatActivity {
             personajesBinding.guidePersonajesLayout.setVisibility(VISIBLE);
         }
 
-
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 personajesBinding.pulseImage, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                personajesBinding.pulseImage, "scaleY", getScreenWidth() / 3f, .5f);
+                personajesBinding.pulseImage, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 personajesBinding.textStep, "alpha", 0f, 1f);
 
@@ -161,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeMundos(View view) {
 
+        // Cargar la transición desde el recurso XML
+        Transition fade = TransitionInflater.from(MainActivity.this)
+                .inflateTransition(R.transition.slide_right);
+        // Iniciar la transición desde el anterior layout
+        TransitionManager.beginDelayedTransition(findViewById(R.id.guidePersonajesLayout), fade);
+
         mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
         mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
@@ -172,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 mundosBinding.pulseImage, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                mundosBinding.pulseImage, "scaleY", getScreenWidth() / 2f, .5f);
+                mundosBinding.pulseImage, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 mundosBinding.textStep, "alpha", 0f, 1f);
 
@@ -199,6 +214,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeColeccionables(View view) {
 
+        // Cargar la transición desde el recurso XML
+        Transition fade = TransitionInflater.from(MainActivity.this)
+                .inflateTransition(R.transition.slide_left);
+        // Iniciar la transición desde el anterior layout
+        TransitionManager.beginDelayedTransition(findViewById(R.id.guideMundosLayout), fade);
+
         coleccionablesBinding.nextToResumen.setOnClickListener(this::initalizeInfo);
         coleccionablesBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
@@ -211,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 coleccionablesBinding.pulseImage, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                coleccionablesBinding.pulseImage, "scaleY", getScreenWidth(), .5f);
+                coleccionablesBinding.pulseImage, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 coleccionablesBinding.textStep, "alpha", 0f, 1f);
 
@@ -238,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeInfo(View view) {
 
+
         getSupportActionBar().show();
 
         infoBinding.nextToResumen.setOnClickListener(this::initalizeResumen);
@@ -245,8 +267,6 @@ public class MainActivity extends AppCompatActivity {
 
         infoBinding.getRoot().setVisibility(VISIBLE);
         coleccionablesBinding.getRoot().setVisibility(GONE);
-
-
 
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
@@ -273,11 +293,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }));
-
-        showInfoDialog();
+       // showInfoDialog();
     }
 
     private void initalizeResumen(View view) {
+
+        // Cargar la transición desde el recurso XML
+        Transition fade = TransitionInflater.from(MainActivity.this)
+                .inflateTransition(R.transition.fade);
+        // Iniciar la transición desde el anterior layout
+        TransitionManager.beginDelayedTransition(findViewById(R.id.guideColeccionablesLayout), fade);
 
         getSupportActionBar().hide();
 
@@ -289,9 +314,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void onExitGuide(View view) {
-
+        //iniciamos en la pantalla personajes
+        navController.navigate(R.id.navigation_characters);
         //volvemos a mostrar ActionBar después de la guide
         getSupportActionBar().show();
+
 
         needToStartGuide = false;
 

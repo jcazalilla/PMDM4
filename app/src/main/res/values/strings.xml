@@ -17,18 +17,18 @@
 
     <!--de la guia personjes-->
     <string name="salir_de_la_guia">Salir de la guia</string>
-    <string name="personajes_de_spyro">Aquí podrás explorar todos los personajes del mundo de Spyro.</string>
+    <string name="personajes_de_spyro"><b>Personajes:</b> Aquí podrás explorar todos los personajes del mundo de Spyro.</string>
     <string name="texto_info_comienzo">Pulsa <b>comenzar</b> para ser tu guia en el mundo de Spyro</string>
     <string name="ir_a_mundos">Ir a pantalla Mundos</string>
 
     <!--de la guia mundos-->
-    <string name="mundos_de_spyro">En esta pantalla encontrarás los mundos de Spyro</string>
+    <string name="mundos_de_spyro"><b>Mundos:</b> En esta pantalla encontrarás los mundos de Spyro</string>
     <string name="ir_a_coleccionables">Ir a Colecccionables</string>
 
 
     <!--de la guia resumen-->
     <string name="ir_a_resumen">Ir a pantalla resumen</string>
-    <string name="coleccionables_espyro">Aquí tendrás todos los coleccionables capturados.
+    <string name="coleccionables_espyro">Aquí tendrás todos los <b>Coleccionables</b> capturados.
         Como gemas,huevos de dragón, puntos de habilidad, cajas de espirtu y libélulas.</string>
 
     <!--del resumen final-->
@@ -41,7 +41,7 @@
 
 
     <!--del icono de información-->
-    <string name="info_desarrollador">Información del desarrollador</string>
+    <string name="info_desarrollador"><b>Información</b> del desarrollador</string>
     <string name="siguiente"><![CDATA[Siguiente >>]]></string>
 
 

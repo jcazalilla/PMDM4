@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/guidePersonajesLayout"
@@ -16,10 +15,10 @@
         android:layout_width="125dp"
         android:layout_height="46dp"
         android:layout_marginTop="56dp"
-        android:background="@color/white_trasparent"
+        android:background="@color/red"
+        android:textColor="@color/white"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/nextToMundos"
         app:layout_constraintHorizontal_bias="0.29"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|top|end"
         android:layout_marginTop="56dp"
-        android:background="@color/white_trasparent"
+        android:background="@color/white"
         android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -39,7 +38,6 @@
         app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <ImageView
@@ -59,8 +57,8 @@
         android:layout_marginTop="408dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
-        android:padding="15dp"
         android:gravity="center"
+        android:padding="15dp"
         android:text="@string/personajes_de_spyro"
         android:textColor="@color/black"
         android:textSize="22sp"
@@ -71,3 +69,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
