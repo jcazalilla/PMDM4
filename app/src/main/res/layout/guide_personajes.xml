@@ -16,9 +16,9 @@
         android:layout_height="46dp"
         android:layout_marginTop="56dp"
         android:background="@color/red"
-        android:textColor="@color/white"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/nextToMundos"
         app:layout_constraintHorizontal_bias="0.29"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,16 +40,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/pulseImage"
-        android:layout_width="141dp"
-        android:layout_height="193dp"
-        android:layout_marginTop="620dp"
-        android:layout_marginEnd="284dp"
-        android:src="@drawable/pulse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textStep"
         android:layout_width="262dp"
@@ -67,6 +57,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/pulseImage"
+        android:layout_width="191dp"
+        android:layout_height="216dp"
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="276dp"
+        android:src="@drawable/pulse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -170,8 +170,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    @SuppressLint("RestrictedApi")
     private void initializeGuide() {
 
         getSupportActionBar().hide();//oculta ActionBar
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializePersonajes(View view) {
         getSupportActionBar().show();
 
-        positionPulse();
+        positionPulse(0.001f);//posición para personajes
 
 
         // Cargar la transición desde el recurso XML
@@ -240,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeMundos(View view) {
 
+        positionPulse(5f);
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.slide_right);
@@ -400,16 +399,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void positionPulse() {
+    public void positionPulse(float position) {
+
+        /*// Find the ImageView by its ID
+        final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
+
+        // Get the screen density metrics
+        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+        float dpHeight = dm.heightPixels / dm.density; // Convert pixels to DP
+        float dpWidth = dm.widthPixels / dm.density;  // Convert pixels to DP
+
+        // Get the current layout params of the ImageView
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
+
+        // Adjust the positioning by margins, ensuring they're in DP
+        lp.leftMargin = (int) (dpWidth * 0.5f);  // Adjust horizontal positioning to 50% of screen width
+        lp.topMargin = (int) (dpHeight * 1.0555f);  // Adjust vertical positioning slightly below the screen height
+
+        // Apply the updated layout params to the ImageView
+        pulseImage.setLayoutParams(lp);*/
+
         final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
 
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        float dpHeight = dm.heightPixels;
-        float dpWidth = dm.widthPixels/3;
+        float dpHeight = dm.heightPixels / dm.density;
+        float dpWidth = dm.widthPixels / dm.density;
 
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
-        lp.leftMargin = (int) ((dpWidth));
-        lp.topMargin = (int) ((dpHeight));
+        //personajes dpWidth*0.001f
+        //           dpHeight * 2.5f
+
+        lp.leftMargin = (int) ((dpWidth * position));
+        lp.topMargin = (int) ((dpHeight * 2.5f));
         pulseImage.setLayoutParams(lp);
     }
 
