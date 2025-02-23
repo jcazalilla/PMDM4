@@ -17,10 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -168,15 +170,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //calcula el ancho de pantalla del dsipositivo en píxeles(float)
-    private float getScreenWidth() {
-        // Obtenemos el ancho de la pantalla
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        float screenWidth = displayMetrics.widthPixels;
-
-        return screenWidth;
-    }
 
     @SuppressLint("RestrictedApi")
     private void initializeGuide() {
@@ -190,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
     //inicia guia
     private void initializePersonajes(View view) {
         getSupportActionBar().show();
+
+        positionPulse();
+
 
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
@@ -333,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeInfo(View view) {
 
+
         infoBinding.nextToResumen.setOnClickListener(this::initalizeResumen);
         infoBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
@@ -400,6 +397,20 @@ public class MainActivity extends AppCompatActivity {
         coleccionablesBinding.guideColeccionablesLayout.setVisibility(GONE);
         infoBinding.guideInfoLayout.setVisibility(GONE);
         resumenBinding.guideResumenLayout.setVisibility(GONE);
+    }
+
+
+    public void positionPulse() {
+        final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
+
+        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+        float dpHeight = dm.heightPixels;
+        float dpWidth = dm.widthPixels/3;
+
+        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
+        lp.leftMargin = (int) ((dpWidth));
+        lp.topMargin = (int) ((dpHeight));
+        pulseImage.setLayoutParams(lp);
     }
 
 

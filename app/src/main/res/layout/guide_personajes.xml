@@ -42,10 +42,10 @@
 
     <ImageView
         android:id="@+id/pulseImage"
-        android:layout_width="170dp"
-        android:layout_height="219dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="224dp"
+        android:layout_width="141dp"
+        android:layout_height="193dp"
+        android:layout_marginTop="620dp"
+        android:layout_marginEnd="284dp"
         android:src="@drawable/pulse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
