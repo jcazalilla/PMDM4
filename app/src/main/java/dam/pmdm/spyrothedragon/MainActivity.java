@@ -3,13 +3,11 @@ package dam.pmdm.spyrothedragon;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-
-import static androidx.constraintlayout.widget.ConstraintLayout.*;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
@@ -18,15 +16,11 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -39,6 +33,9 @@ import dam.pmdm.spyrothedragon.databinding.GuideInfoBinding;
 import dam.pmdm.spyrothedragon.databinding.GuideMundosBinding;
 import dam.pmdm.spyrothedragon.databinding.GuidePersonajesBinding;
 import dam.pmdm.spyrothedragon.databinding.GuideResumenBinding;
+import dam.pmdm.spyrothedragon.ui.CharactersFragment;
+import dam.pmdm.spyrothedragon.ui.CollectiblesFragment;
+import dam.pmdm.spyrothedragon.ui.WorldsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView;
 
+
     private boolean needToStartGuide = true;
+    private Object menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +96,77 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean selectedBottomMenu(@NonNull MenuItem menuItem) {
+
+        //declaramos previamente el fragemento que vamos
+        //a tratar para hacer la animación con bottomNavigation
+        Fragment selectedFragment = null;
+
+        if (menuItem.getItemId() == R.id.nav_characters) {
+
+            navController.navigate(R.id.navigation_characters);
+            //instanciamos el fragmento declarado en cada opción,
+            // esta y las siguientes
+            selectedFragment = new CharactersFragment();
+
+        } else if (menuItem.getItemId() == R.id.nav_worlds) {
+
+            navController.navigate(R.id.navigation_worlds);
+            selectedFragment = new WorldsFragment();
+
+        } else {
+
+            navController.navigate(R.id.navigation_collectibles);
+            selectedFragment = new CollectiblesFragment();
+        }
+        //configuramos animación entre fragmentos al navegar
+        if (selectedFragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    //usamos nuestras customs
+                    .setCustomAnimations(
+                            R.anim.exit_to_right,
+                            R.anim.enter_from_left,
+                            R.anim.exit_to_left,
+                            R.anim.enter_from_left)
+                    //navegamos al contenedor de fragmento con el fragmento seleccionado
+                    //con las custom animation
+                    .replace(R.id.navHostFragment, selectedFragment)
+                    /*// guardamos fragmento a retroceder
+                    //aunque no es necesrio xq cambiamos con los
+                    // botones de la navigation
+                    .addToBackStack(null)*/
+                    .commit();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Infla el menú
+        getMenuInflater().inflate(R.menu.about_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Gestiona el clic en el ítem de información
+        if (item.getItemId() == R.id.action_info) {
+            showInfoDialog();  // Muestra el diálogo
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showInfoDialog() {
+        // Crear un diálogo de información
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_about)
+                .setMessage(R.string.text_about)
+                .setPositiveButton(R.string.accept, null)
+                .show();
+    }
+
 
     //calcula el ancho de pantalla del dsipositivo en píxeles(float)
     private float getScreenWidth() {
@@ -108,8 +178,10 @@ public class MainActivity extends AppCompatActivity {
         return screenWidth;
     }
 
+    @SuppressLint("RestrictedApi")
     private void initializeGuide() {
-        getSupportActionBar().hide();//ocultamos Actionbar en la guide
+
+        getSupportActionBar().hide();//oculta ActionBar
         bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
         bienvenidaBinding.guidebienvenidaLayout.setVisibility(VISIBLE);
     }
@@ -117,12 +189,14 @@ public class MainActivity extends AppCompatActivity {
 
     //inicia guia
     private void initializePersonajes(View view) {
+        getSupportActionBar().show();
 
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.fade);
         // Iniciar la transición desde el anterior layout
         TransitionManager.beginDelayedTransition(findViewById(R.id.guideBienvenidaLayout), fade);
+
 
         //listener de los buttons
         personajesBinding.exitGuide.setOnClickListener(this::onExitGuide);
@@ -195,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         scaleY.setRepeatCount(3);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1500);
+        animatorSet.setDuration(1000);
         animatorSet.start();
 
         animatorSet.addListener((new AnimatorListenerAdapter() {
@@ -240,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
         scaleY.setRepeatCount(3);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1500);
+        animatorSet.setDuration(1000);
         animatorSet.start();
 
         animatorSet.addListener((new AnimatorListenerAdapter() {
@@ -259,9 +333,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeInfo(View view) {
 
-
-        getSupportActionBar().show();
-
         infoBinding.nextToResumen.setOnClickListener(this::initalizeResumen);
         infoBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
@@ -272,14 +343,14 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 infoBinding.pulseImage, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                infoBinding.pulseImage, "scaleY", getScreenWidth(), .5f);
+                infoBinding.pulseImage, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 infoBinding.textStep, "alpha", 0f, 1f);
         scaleX.setRepeatCount(3);
         scaleY.setRepeatCount(3);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1500);
+        animatorSet.setDuration(1000);
         animatorSet.start();
 
         animatorSet.addListener((new AnimatorListenerAdapter() {
@@ -293,7 +364,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }));
-       // showInfoDialog();
     }
 
     private void initalizeResumen(View view) {
@@ -304,7 +374,6 @@ public class MainActivity extends AppCompatActivity {
         // Iniciar la transición desde el anterior layout
         TransitionManager.beginDelayedTransition(findViewById(R.id.guideColeccionablesLayout), fade);
 
-        getSupportActionBar().hide();
 
         resumenBinding.startGame.setOnClickListener(this::onExitGuide);
 
@@ -316,8 +385,6 @@ public class MainActivity extends AppCompatActivity {
     private void onExitGuide(View view) {
         //iniciamos en la pantalla personajes
         navController.navigate(R.id.navigation_characters);
-        //volvemos a mostrar ActionBar después de la guide
-        getSupportActionBar().show();
 
 
         needToStartGuide = false;
@@ -333,44 +400,6 @@ public class MainActivity extends AppCompatActivity {
         coleccionablesBinding.guideColeccionablesLayout.setVisibility(GONE);
         infoBinding.guideInfoLayout.setVisibility(GONE);
         resumenBinding.guideResumenLayout.setVisibility(GONE);
-    }
-
-
-    private boolean selectedBottomMenu(@NonNull MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.nav_characters)
-            navController.navigate(R.id.navigation_characters);
-        else if (menuItem.getItemId() == R.id.nav_worlds)
-            navController.navigate(R.id.navigation_worlds);
-        else
-            navController.navigate(R.id.navigation_collectibles);
-        return true;
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Infla el menú
-        getMenuInflater().inflate(R.menu.about_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Gestiona el clic en el ítem de información
-        if (item.getItemId() == R.id.action_info) {
-            showInfoDialog();  // Muestra el diálogo
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showInfoDialog() {
-        // Crear un diálogo de información
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.title_about)
-                .setMessage(R.string.text_about)
-                .setPositiveButton(R.string.accept, null)
-                .show();
     }
 
 

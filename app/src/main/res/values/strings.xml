@@ -22,13 +22,14 @@
     <string name="ir_a_mundos">Ir a pantalla Mundos</string>
 
     <!--de la guia mundos-->
-    <string name="mundos_de_spyro"><b>Mundos:</b> En esta pantalla encontrarás los mundos de Spyro</string>
+    <string name="mundos_de_spyro"><b>Mundos:</b> Encontrarás los mundos de Spyro.
+        \n Entre otros: Playa Soleada, Jardines del Mediodía, Destello....</string>
     <string name="ir_a_coleccionables">Ir a Colecccionables</string>
 
 
     <!--de la guia resumen-->
     <string name="ir_a_resumen">Ir a pantalla resumen</string>
-    <string name="coleccionables_espyro">Aquí tendrás todos los <b>Coleccionables</b> capturados.
+    <string name="coleccionables_espyro">Pantalla donde tendrás todos los <b>Coleccionables</b> capturados.
         Como gemas,huevos de dragón, puntos de habilidad, cajas de espirtu y libélulas.</string>
 
     <!--del resumen final-->
