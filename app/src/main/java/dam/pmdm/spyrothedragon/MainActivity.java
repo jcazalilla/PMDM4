@@ -7,22 +7,19 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -57,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean needToStartGuide = true;
     private Object menu;
+
+    private CheckBox checkBox;
+    private PreferencesGuide preferencesGuide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,15 +174,34 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();//oculta ActionBar
         bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
-        bienvenidaBinding.guidebienvenidaLayout.setVisibility(VISIBLE);
+        bienvenidaBinding.getRoot().setVisibility(VISIBLE);
     }
 
 
     //inicia guia
     private void initializePersonajes(View view) {
-        getSupportActionBar().show();
 
-        positionPulse(0.001f);//posición para personajes
+        getSupportActionBar().show();
+        bienvenidaBinding.getRoot().setVisibility(GONE);
+
+        //comprobamos que se haya visualizado la guide en este punto
+        checkBox = findViewById(R.id.chkPersonajes);
+        preferencesGuide= new PreferencesGuide(this);
+        boolean isChecked = preferencesGuide.getKeyPersonajes();
+        if (isChecked){
+            initalizeMundos(view);
+        }else{
+
+            checkBox.setChecked(true);
+            //guardamos el cambio de estado a true del checbox en preferencias
+            checkBox.setOnCheckedChangeListener((buttonView, isCheckedNow) ->{
+                preferencesGuide.setPreferencesPersonajes(true);
+            } );
+        }
+
+
+
+       // positionPulse(1f);//posición para personajes
 
 
         // Cargar la transición desde el recurso XML
@@ -238,7 +257,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeMundos(View view) {
 
-        positionPulse(5f);
+        navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
+        personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+        mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
+        //comprobamos que se haya visualizado la guide en este punto
+        checkBox = findViewById(R.id.chkMundos);
+        preferencesGuide= new PreferencesGuide(this);
+        boolean isChecked = preferencesGuide.getKeyMundos();
+        if (isChecked){
+            initalizeColeccionables(view);
+        }else{
+            checkBox.setChecked(true);
+            //guardamos el cambio de estado a true del checbox en preferencias
+            checkBox.setOnCheckedChangeListener((buttonView, isCheckedNow) ->{
+                preferencesGuide.setPreferencesMundos(true);
+            } );
+        }
+
+        //positionPulse(0f);
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.slide_right);
@@ -248,9 +285,7 @@ public class MainActivity extends AppCompatActivity {
         mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
         mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
-        navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
-        personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
 
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
@@ -283,6 +318,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeColeccionables(View view) {
 
+        navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
+        mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+        coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
+
+        //comprobamos que se haya visualizado la guide en este punto
+        checkBox = findViewById(R.id.chkColecciones);
+        preferencesGuide= new PreferencesGuide(this);
+        boolean isChecked = preferencesGuide.getKeyColecciones();
+        if (isChecked){
+            initalizeResumen(view);
+        }else{
+            checkBox.setChecked(true);
+            //guardamos el cambio de estado a true del checbox en preferencias
+            checkBox.setOnCheckedChangeListener((buttonView, isCheckedNow) ->{
+                preferencesGuide.setPreferencesColecciones(true);
+            } );
+        }
+
+       // positionPulse(5f);
+
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.slide_left);
@@ -293,13 +349,11 @@ public class MainActivity extends AppCompatActivity {
         coleccionablesBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
 
-        navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
-        mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
 
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                coleccionablesBinding.pulseImage, "scaleX", 1f, 0.5f);
+                coleccionablesBinding.pulseImage, "scaleX", 1f, .5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
                 coleccionablesBinding.pulseImage, "scaleY", 1f, .5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
@@ -328,12 +382,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeInfo(View view) {
 
+        infoBinding.getRoot().setVisibility(VISIBLE);
+        coleccionablesBinding.getRoot().setVisibility(GONE);
 
         infoBinding.nextToResumen.setOnClickListener(this::initalizeResumen);
         infoBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
-        infoBinding.getRoot().setVisibility(VISIBLE);
-        coleccionablesBinding.getRoot().setVisibility(GONE);
+
 
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
@@ -364,6 +419,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeResumen(View view) {
 
+        infoBinding.getRoot().setVisibility(GONE);
+        resumenBinding.guideResumenLayout.setVisibility(VISIBLE);
+
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.fade);
@@ -373,8 +431,7 @@ public class MainActivity extends AppCompatActivity {
 
         resumenBinding.startGame.setOnClickListener(this::onExitGuide);
 
-        infoBinding.getRoot().setVisibility(GONE);
-        resumenBinding.guideResumenLayout.setVisibility(VISIBLE);
+
     }
 
 
@@ -399,40 +456,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void positionPulse(float position) {
-
-        /*// Find the ImageView by its ID
-        final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
-
-        // Get the screen density metrics
-        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        float dpHeight = dm.heightPixels / dm.density; // Convert pixels to DP
-        float dpWidth = dm.widthPixels / dm.density;  // Convert pixels to DP
-
-        // Get the current layout params of the ImageView
-        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
-
-        // Adjust the positioning by margins, ensuring they're in DP
-        lp.leftMargin = (int) (dpWidth * 0.5f);  // Adjust horizontal positioning to 50% of screen width
-        lp.topMargin = (int) (dpHeight * 1.0555f);  // Adjust vertical positioning slightly below the screen height
-
-        // Apply the updated layout params to the ImageView
-        pulseImage.setLayoutParams(lp);*/
+   /* public void positionPulse(float position) {
 
         final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
 
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        float dpHeight = dm.heightPixels / dm.density;
-        float dpWidth = dm.widthPixels / dm.density;
+        int dpHeight = dm.heightPixels;
+        int dpWidth = dm.widthPixels;
 
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
         //personajes dpWidth*0.001f
         //           dpHeight * 2.5f
 
         lp.leftMargin = (int) ((dpWidth * position));
-        lp.topMargin = (int) ((dpHeight * 2.5f));
+        lp.topMargin = (int) ((dpHeight *//** 2.5f*//*));
         pulseImage.setLayoutParams(lp);
-    }
+    }*/
 
 
 }
