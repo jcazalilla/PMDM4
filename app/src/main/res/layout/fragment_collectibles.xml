@@ -12,10 +12,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <WebView
+    <VideoView
+        android:id="@+id/video_wiew"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:id="@+id/webVideo"/>
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

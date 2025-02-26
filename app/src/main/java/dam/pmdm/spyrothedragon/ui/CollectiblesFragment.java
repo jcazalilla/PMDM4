@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.media3.ui.PlayerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +34,7 @@ public class CollectiblesFragment extends Fragment {
     private CollectiblesAdapter adapter;
     private List<Collectible> collectiblesList;
 
+    private VideoView videoView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,20 +46,10 @@ public class CollectiblesFragment extends Fragment {
         adapter = new CollectiblesAdapter(collectiblesList);
         recyclerView.setAdapter(adapter);
 
-         binding.webVideo.findViewById(R.id.webVideo);//recurso WebVideo del layout
-        WebSettings webSettings = binding.webVideo.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        String videoId="_dXU-fgTneYNomVE";
-        String videoHtml ="<html><body style='margin:0;padding:0;'><iframe width='100%' height='100%' src=\"https://www.youtube.com/embed/GlhvOnEFGAE?si=_dXU-fgTneYNomVE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
-
-        webView.loadData(videoHtml, "text/html", "utf-8");
-
-
-
-
         loadCollectibles();
         return binding.getRoot();
+
+
     }
 
     @Override

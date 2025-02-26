@@ -2,6 +2,7 @@ package dam.pmdm.spyrothedragon.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import dam.pmdm.spyrothedragon.R;
 import dam.pmdm.spyrothedragon.models.Collectible;
+import dam.pmdm.spyrothedragon.ui.CollectiblesFragment;
 
 public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapter.CollectiblesViewHolder> {
 
@@ -85,6 +87,11 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
     }
 
     private void showEasterEgg(Context context) {
+        //Toast.makeText(context.getApplicationContext(), "Easter Egg visualizado",Toast.LENGTH_SHORT).show();
+
+        //pasamos intent al fragment
+        Intent intent = new Intent(context, CollectiblesFragment.class);
+        context.startActivity(intent);
 
     }
 }
