@@ -17,9 +17,11 @@ public class PreferencesGuide {
     //constructor
     public PreferencesGuide(Context context) {
 
-        this.context = context;
-        sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        if (context!=null) {
+            this.context = context;
+            sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+        }
     }
 
     //==============================================================================
@@ -51,7 +53,7 @@ public class PreferencesGuide {
     }
 
     public boolean getKeyMundos() {
-        return sharedPreferences.getBoolean(KEY_MUNDOS, false);
+        return sharedPreferences.getBoolean(KEY_MUNDOS,false);
     }
 
     public boolean getKeyColecciones() {

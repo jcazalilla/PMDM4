@@ -1,11 +1,18 @@
 package dam.pmdm.spyrothedragon.adapters;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -35,6 +42,29 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
         // Cargar la imagen (simulado con un recurso drawable)
         int imageResId = holder.itemView.getContext().getResources().getIdentifier(collectible.getImage(), "drawable", holder.itemView.getContext().getPackageName());
         holder.imageImageView.setImageResource(imageResId);
+
+        //EASTER EGG === video =====================
+        final int[] toques = {0}; //contador de toques en pantalla
+        final int TOQUES_NECESARIOS = 4;
+
+
+        holder.imageImageView.setOnClickListener(view -> {
+            toques[0]++;
+            if (toques[0] >= TOQUES_NECESARIOS) {
+                Drawable drawableActual = holder.imageImageView.getDrawable();
+                Drawable drawableReferencia = ContextCompat.getDrawable(
+                        holder.itemView.getContext(), R.drawable.gems);
+
+                if (drawableActual != null && drawableReferencia != null
+                        && drawableActual.getConstantState() != null
+                        && drawableActual.getConstantState().equals(drawableReferencia.getConstantState())) {
+
+                    showEasterEgg(holder.imageImageView.getContext());
+                    toques[0] = 0; //reiniciamos contador de toques
+                }
+            }
+        });
+        //====================================
     }
 
     @Override
@@ -52,5 +82,9 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
             nameTextView = itemView.findViewById(R.id.name);
             imageImageView = itemView.findViewById(R.id.image);
         }
+    }
+
+    private void showEasterEgg(Context context) {
+
     }
 }

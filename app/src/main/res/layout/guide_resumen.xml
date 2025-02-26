@@ -8,7 +8,7 @@
     android:background="@color/purple_200"
     android:clickable="true"
     android:focusable="true"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <TextView
         android:id="@+id/textView2"
