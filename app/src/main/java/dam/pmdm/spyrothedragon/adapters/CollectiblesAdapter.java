@@ -1,17 +1,17 @@
 package dam.pmdm.spyrothedragon.adapters;
 
-import android.app.AlertDialog;
+import static android.view.View.VISIBLE;
+
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +20,6 @@ import java.util.List;
 
 import dam.pmdm.spyrothedragon.R;
 import dam.pmdm.spyrothedragon.models.Collectible;
-import dam.pmdm.spyrothedragon.ui.CollectiblesFragment;
 
 public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapter.CollectiblesViewHolder> {
 
@@ -87,11 +86,25 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
     }
 
     private void showEasterEgg(Context context) {
-        //Toast.makeText(context.getApplicationContext(), "Easter Egg visualizado",Toast.LENGTH_SHORT).show();
 
-        //pasamos intent al fragment
-        Intent intent = new Intent(context, CollectiblesFragment.class);
-        context.startActivity(intent);
+        // Crear un diálogo
+        Dialog dialog = new Dialog(context, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(R.layout.fragment_collectibles);
+
+        // Obtener el VideoView del Layout Collectibles
+        VideoView videoView = dialog.findViewById(R.id.video_wiew);
+        //Hacer visible el videoView del layout del fragmentCollectibles
+        videoView.setVisibility(VISIBLE);
+
+        String videoPath = "android.resource://" + context.getPackageName() + "/" + R.raw.demo_video_spyro;
+        videoView.setVideoURI(Uri.parse(videoPath));
+
+        videoView.start();
+
+        dialog.show();
+
+        // Cuando el video termina
+        videoView.setOnCompletionListener(mp -> dialog.dismiss());
 
     }
 }

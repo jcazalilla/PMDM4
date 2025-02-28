@@ -1,5 +1,10 @@
 package dam.pmdm.spyrothedragon.ui;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.hardware.camera2.CameraCaptureSession;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +12,15 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.media3.ui.PlayerView;
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.ui.LegacyPlayerControlView;
+import androidx.media3.ui.PlayerControlView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +43,7 @@ public class CollectiblesFragment extends Fragment {
     private CollectiblesAdapter adapter;
     private List<Collectible> collectiblesList;
 
-    private VideoView videoView;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +58,9 @@ public class CollectiblesFragment extends Fragment {
         loadCollectibles();
         return binding.getRoot();
 
-
     }
+
+
 
     @Override
     public void onDestroyView() {
