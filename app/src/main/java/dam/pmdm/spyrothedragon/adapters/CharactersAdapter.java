@@ -1,5 +1,6 @@
 package dam.pmdm.spyrothedragon.adapters;
 
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import dam.pmdm.spyrothedragon.LLamaFuego;
+import dam.pmdm.spyrothedragon.LlamaFuego;
 import dam.pmdm.spyrothedragon.R;
 import dam.pmdm.spyrothedragon.models.Character;
 
@@ -79,14 +79,16 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     }
 
     private void showCanvas(Context context) {
-        // Crear un diálogo personalizado con un Canvas
+
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.fragment_canvas);
 
         // Obtener el View personalizado para dibujar
-        LLamaFuego lLamaFuego = dialog.findViewById(R.id.llamaFuego);
+        LlamaFuego llamaFuego = dialog.findViewById(R.id.llamaFuego);
 
-        // Mostrar el diálogo
+       
         dialog.show();
+
+
     }
 }

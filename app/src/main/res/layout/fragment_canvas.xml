@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <!-- Usar la vista personalizada -->
-    <dam.pmdm.spyrothedragon.LLamaFuego
+    <dam.pmdm.spyrothedragon.LlamaFuego
         android:id="@+id/llamaFuego"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/transparent"/>
 
     </LinearLayout>

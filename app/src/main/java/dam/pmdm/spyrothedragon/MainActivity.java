@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +22,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import java.io.IOException;
 
 import dam.pmdm.spyrothedragon.databinding.ActivityMainBinding;
 import dam.pmdm.spyrothedragon.databinding.GuideBienvenidaBinding;
@@ -202,10 +203,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-
-        // positionPulse(1f);//posición para personajes
-
-
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.fade);
@@ -228,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
             //hacemos visible la guia
             personajesBinding.guidePersonajesLayout.setVisibility(VISIBLE);
         }
+
+        positionPulse(-38f,.30f);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 personajesBinding.pulseImage, "scaleX", 1f, 0.5f);
@@ -268,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
         //comprobamos que se haya visualizado la guide en este punto
         preferencesGuide = new PreferencesGuide(this);
         CheckBox chkMundos = findViewById(R.id.chkMundos);
+        Boolean chk = preferencesGuide.getKeyMundos();
 
         if (preferencesGuide.getKeyMundos() == true) {
             initalizeColeccionables(view);
@@ -289,11 +289,12 @@ public class MainActivity extends AppCompatActivity {
         mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
         mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
+        positionPulse(23,0);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                mundosBinding.pulseImage, "scaleX", 1f, 0.5f);
+                mundosBinding.pulseImage, "scaleX", .5f, 1f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                mundosBinding.pulseImage, "scaleY", 1f, .5f);
+                mundosBinding.pulseImage, "scaleY", .5f, 1f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 mundosBinding.textStep, "alpha", 0f, 1f);
 
@@ -328,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
 
         //comprobamos que se haya visualizado la guide en este punto
         preferencesGuide = new PreferencesGuide(this);
-        CheckBox chkColecciones = findViewById(R.id.chkMundos);
+        CheckBox chkColecciones = findViewById(R.id.chkColecciones);
 
         if (preferencesGuide.getKeyColecciones() == true) {
             initalizeResumen(view);
@@ -340,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // positionPulse(5f);
+         positionPulse(.5f,.30f);
 
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
@@ -488,22 +489,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-   /* public void positionPulse(float position) {
+    public void positionPulse(float positionX, float positionY) {
 
         final ImageView pulseImage = (ImageView) findViewById(R.id.pulseImage);
 
+        // Obtener las dimensiones de la pantalla
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        int dpHeight = dm.heightPixels;
-        int dpWidth = dm.widthPixels;
+        int screenWidth = dm.widthPixels;
+        int screenHeight = dm.heightPixels;
 
+        // Obtener los parámetros de diseño actuales de pulseImage
         ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
-        //personajes dpWidth*0.001f
-        //           dpHeight * 2.5f
 
-        lp.leftMargin = (int) ((dpWidth * position));
-        lp.topMargin = (int) ((dpHeight *//** 2.5f*//*));
+        // Calcular la posición en función de las dimensiones de la pantalla
+        lp.leftMargin = (int) (screenWidth * positionX);
+        lp.topMargin = (int) (screenHeight * positionY);
+
+        // Aplicar los nuevos parámetros de diseño a pulseImage
         pulseImage.setLayoutParams(lp);
-    }*/
+    }
 
 
 }
