@@ -28,7 +28,7 @@ uno para pasar a la siguiente pantalla de la guia y otro para abandonarla e irse
 
 · __Mostrar videos:__ mediante la técnica _Easter Egg_. Como elemento oculto y visualizarlo tras un número determianado de pulsaciones.
 
-en la pantalla sobre un elemento del Recyclerview
+  en la pantalla sobre un elemento del Recyclerview
 
 · __Canvas:__ para dibujar animación, activada al hacer pulsación prolongada sobre el item del Recycleview "Spyro".
 
