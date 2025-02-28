@@ -5,9 +5,9 @@ La tarea tiene como objetivo crear una guia al usuario del juego **Spyro the Dra
 
 pantallas:
 
-      **1. Personajes**</p>
-      **2. Mundos**</p>
-      **3. Coleccionables**</p>
+      **1. Personajes**
+      **2. Mundos**
+      **3. Coleccionables**
 
 Para esta guia se crean principalmente 3 layouts, uno para cada pantalla mencionada. Estos layouts irán superpuestos
 
