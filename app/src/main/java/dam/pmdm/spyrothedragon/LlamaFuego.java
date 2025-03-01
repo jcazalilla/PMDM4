@@ -26,18 +26,6 @@ public class LlamaFuego extends View {
         super.onDraw(canvas);
 
 
-        // Dibuja la llama con la escala actual
-        canvas.save();
-        canvas.scale(scale, scale, getWidth() / 2f, getHeight() / 2f);
-        canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, 50, paint);
-        canvas.restore();
     }
 
-    public void updateScale(float newScale) {
-        this.scale = newScale;
-        invalidate(); // Forza un redibujo
-    }
-    public void init(){
-        paint.setColor(Color.RED); // Color de la llama
-    }
 }

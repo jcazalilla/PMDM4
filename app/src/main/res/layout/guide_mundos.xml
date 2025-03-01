@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/guideMundosLayout"
@@ -10,66 +10,58 @@
     android:focusable="true"
     android:visibility="visible">
 
+
     <android.widget.Button
         android:id="@+id/exitGuide"
         android:layout_width="125dp"
         android:layout_height="46dp"
-        android:layout_marginTop="60dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="163dp"
         android:background="@color/red"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/nextToColeccionables"
-        app:layout_constraintHorizontal_bias="0.383"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/white" />
 
     <android.widget.Button
         android:id="@+id/nextToColeccionables"
         android:layout_width="116dp"
         android:layout_height="45dp"
-        android:layout_gravity="right|top|end"
-        android:layout_marginTop="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="55dp"
         android:background="@color/white"
         android:text="@string/siguiente"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.806"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/textStep"
         android:layout_width="311dp"
         android:layout_height="164dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="312dp"
-        android:layout_marginRight="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="255dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/mundos_de_spyro"
         android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.59"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nextToColeccionables" />
+        android:textSize="22sp" />
 
     <ImageView
         android:id="@+id/pulseImage"
         android:layout_width="206dp"
         android:layout_height="180dp"
-        android:src="@drawable/pulse"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="119dp"
+        android:layout_marginBottom="-65dp"
+        android:src="@drawable/pulse" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

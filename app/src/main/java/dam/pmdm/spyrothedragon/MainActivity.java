@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -184,10 +185,6 @@ public class MainActivity extends AppCompatActivity {
     //inicia guia
     private void initializePersonajes(View view) {
 
-        bienvenidaBinding.getRoot().setVisibility(GONE);
-
-        soundCambioFragment();//reproducir sonido
-
         //comprobamos que se haya visualizado la guide en este punto
         preferencesGuide = new PreferencesGuide(this);
         CheckBox chkPersonajes = findViewById(R.id.chkPersonajes);
@@ -202,6 +199,11 @@ public class MainActivity extends AppCompatActivity {
                 preferencesGuide.setPreferencesPersonajes(isChecked);
             });
         }
+
+        bienvenidaBinding.getRoot().setVisibility(GONE);
+
+        soundCambioFragment();//reproducir sonido
+
 
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
@@ -226,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
             personajesBinding.guidePersonajesLayout.setVisibility(VISIBLE);
         }
 
-        positionPulse(-38f,.30f);
+        positionPulse(-38f, .30f);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 personajesBinding.pulseImage, "scaleX", 1f, 0.5f);
@@ -258,11 +260,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeMundos(View view) {
 
-        navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
-        personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
-
-        soundCambioFragment();//reproducir sonido
 
         //comprobamos que se haya visualizado la guide en este punto
         preferencesGuide = new PreferencesGuide(this);
@@ -279,17 +276,23 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        //positionPulse(0f);
+        navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
+        personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+        mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
+        soundCambioFragment();//reproducir sonido
+
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
                 .inflateTransition(R.transition.slide_right);
         // Iniciar la transición desde el anterior layout
         TransitionManager.beginDelayedTransition(findViewById(R.id.guidePersonajesLayout), fade);
 
+
         mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
         mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
-        positionPulse(23,0);
+        positionPulse(23, 0);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 mundosBinding.pulseImage, "scaleX", .5f, 1f);
@@ -321,18 +324,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeColeccionables(View view) {
 
-        navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
-        mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
-
-        soundCambioFragment();//reproducir sonido
 
         //comprobamos que se haya visualizado la guide en este punto
         preferencesGuide = new PreferencesGuide(this);
         CheckBox chkColecciones = findViewById(R.id.chkColecciones);
 
         if (preferencesGuide.getKeyColecciones() == true) {
-            initalizeResumen(view);
+            onExitGuide(view);
         } else {
             chkColecciones.setChecked(true);
             //guardamos el cambio de estado a true del checbox en preferencias
@@ -341,7 +339,15 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-         positionPulse(.5f,.30f);
+
+        navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
+        mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+        coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+
+        soundCambioFragment();//reproducir sonido
+
+
+        positionPulse(.5f, .30f);
 
         // Cargar la transición desde el recurso XML
         Transition fade = TransitionInflater.from(MainActivity.this)
@@ -499,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
         int screenHeight = dm.heightPixels;
 
         // Obtener los parámetros de diseño actuales de pulseImage
-        ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) pulseImage.getLayoutParams();
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) pulseImage.getLayoutParams();
 
         // Calcular la posición en función de las dimensiones de la pantalla
         lp.leftMargin = (int) (screenWidth * positionX);
