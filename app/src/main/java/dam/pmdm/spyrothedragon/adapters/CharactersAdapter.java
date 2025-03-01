@@ -1,8 +1,5 @@
 package dam.pmdm.spyrothedragon.adapters;
 
-import android.animation.ValueAnimator;
-import android.app.Dialog;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +10,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import dam.pmdm.spyrothedragon.LlamaFuego;
+import dam.pmdm.spyrothedragon.LlamaFuegoCanvas;
 import dam.pmdm.spyrothedragon.R;
 import dam.pmdm.spyrothedragon.models.Character;
 
@@ -53,8 +50,9 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
             if (drawableActual != null && drawableReferencia != null
                     && drawableActual.getConstantState() != null
                     && drawableActual.getConstantState().equals(drawableReferencia.getConstantState())) {
-                
-                showCanvas(holder.imageImageView.getContext());
+
+
+
             }
             return true;
         });
@@ -70,25 +68,12 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 
         TextView nameTextView;
         ImageView imageImageView;
-
+        LlamaFuegoCanvas llamaFuego;
         public CharactersViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.name);
             imageImageView = itemView.findViewById(R.id.image);
+            llamaFuego = itemView.findViewById(R.id.llamaFuego);
         }
-    }
-
-    private void showCanvas(Context context) {
-
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.fragment_canvas);
-
-        // Obtener el View personalizado para dibujar
-        LlamaFuego llamaFuego = dialog.findViewById(R.id.llamaFuego);
-
-       
-        dialog.show();
-
-
     }
 }
