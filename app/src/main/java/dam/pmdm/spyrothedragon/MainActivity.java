@@ -175,7 +175,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeGuide() {
 
+        preferencesGuide = new PreferencesGuide(this);
         getSupportActionBar().hide();//oculta ActionBar
+        if (preferencesGuide.getKeyColecciones() == true
+                && preferencesGuide.getKeyMundos() == true
+                && preferencesGuide.getKeyPersonajes() == true) {
+            onExitGuide(getCurrentFocus());
+        }
         bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
         bienvenidaBinding.getRoot().setVisibility(VISIBLE);
 
@@ -195,67 +201,69 @@ public class MainActivity extends AppCompatActivity {
 
             chkPersonajes.setChecked(true);
             //guardamos el cambio de estado a true del checbox en preferencias
-            chkPersonajes.setOnCheckedChangeListener((button, isChecked) -> {
+            chkPersonajes.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 preferencesGuide.setPreferencesPersonajes(isChecked);
             });
-        }
-
-        bienvenidaBinding.getRoot().setVisibility(GONE);
-
-        soundCambioFragment();//reproducir sonido
 
 
-        // Cargar la transición desde el recurso XML
-        Transition fade = TransitionInflater.from(MainActivity.this)
-                .inflateTransition(R.transition.fade);
-        // Iniciar la transición desde el anterior layout
-        TransitionManager.beginDelayedTransition(findViewById(R.id.guideBienvenidaLayout), fade);
+            bienvenidaBinding.getRoot().setVisibility(GONE);
+
+            soundCambioFragment();//reproducir sonido
 
 
-        //listener de los buttons
-        personajesBinding.exitGuide.setOnClickListener(this::onExitGuide);
-        personajesBinding.nextToMundos.setOnClickListener(this::initalizeMundos);
-
-        if (needToStartGuide) {
-            //bloqueamos bottom navigation
-            binding.navView.setClickable(false);
-            binding.navView.setFocusable(false);
-            binding.navView.setEnabled(false);
-
-            //ocultamos layout de bienvenida
-            bienvenidaBinding.guidebienvenidaLayout.setVisibility(GONE);
-            //hacemos visible la guia
-            personajesBinding.guidePersonajesLayout.setVisibility(VISIBLE);
-        }
-
-        positionPulse(-38f, .30f);
-
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                personajesBinding.pulseImage, "scaleX", 1f, 0.5f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                personajesBinding.pulseImage, "scaleY", 1f, .5f);
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
-                personajesBinding.textStep, "alpha", 0f, 1f);
-
-        scaleX.setRepeatCount(3);
-        scaleY.setRepeatCount(3);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1500);
-        animatorSet.start();
+            // Cargar la transición desde el recurso XML
+            Transition fade = TransitionInflater.from(MainActivity.this)
+                    .inflateTransition(R.transition.fade);
+            // Iniciar la transición desde el anterior layout
+            TransitionManager.beginDelayedTransition(findViewById(R.id.guideBienvenidaLayout), fade);
 
 
-        animatorSet.addListener((new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (needToStartGuide) {
-                    super.onAnimationEnd(animation);
+            //listener de los buttons
+            personajesBinding.exitGuide.setOnClickListener(this::onExitGuide);
+            personajesBinding.nextToMundos.setOnClickListener(this::initalizeMundos);
 
-                    personajesBinding.pulseImage.setVisibility(VISIBLE);
-                    personajesBinding.textStep.setVisibility(VISIBLE);
-                }
+
+            if (needToStartGuide) {
+                //bloqueamos bottom navigation
+                binding.navView.setClickable(false);
+                binding.navView.setFocusable(false);
+                binding.navView.setEnabled(false);
+
+                //ocultamos layout de bienvenida
+                bienvenidaBinding.guidebienvenidaLayout.setVisibility(GONE);
+                //hacemos visible la guia
+                personajesBinding.guidePersonajesLayout.setVisibility(VISIBLE);
             }
-        }));
+
+            positionPulse(-0.05f, .01f);
+
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(
+                    personajesBinding.pulseImage, "scaleX", 1f, .5f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(
+                    personajesBinding.pulseImage, "scaleY", 1f, .5f);
+            ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
+                    personajesBinding.textStep, "alpha", 0f, 1f);
+
+            scaleX.setRepeatCount(3);
+            scaleY.setRepeatCount(3);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(scaleX).with(scaleX).before(fadeIn);
+            animatorSet.setDuration(1500);
+            animatorSet.start();
+
+
+            animatorSet.addListener((new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (needToStartGuide) {
+                        super.onAnimationEnd(animation);
+
+                        personajesBinding.pulseImage.setVisibility(VISIBLE);
+                        personajesBinding.textStep.setVisibility(VISIBLE);
+                    }
+                }
+            }));
+        }
     }
 
     private void initalizeMundos(View view) {
@@ -274,51 +282,52 @@ public class MainActivity extends AppCompatActivity {
             chkMundos.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 preferencesGuide.setPreferencesMundos(isChecked);
             });
-        }
-
-        navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
-        personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
-
-        soundCambioFragment();//reproducir sonido
-
-        // Cargar la transición desde el recurso XML
-        Transition fade = TransitionInflater.from(MainActivity.this)
-                .inflateTransition(R.transition.slide_right);
-        // Iniciar la transición desde el anterior layout
-        TransitionManager.beginDelayedTransition(findViewById(R.id.guidePersonajesLayout), fade);
 
 
-        mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
-        mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
+            navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
+            personajesBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+            mundosBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
 
-        positionPulse(23, 0);
+            soundCambioFragment();//reproducir sonido
 
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                mundosBinding.pulseImage, "scaleX", .5f, 1f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                mundosBinding.pulseImage, "scaleY", .5f, 1f);
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
-                mundosBinding.textStep, "alpha", 0f, 1f);
+            // Cargar la transición desde el recurso XML
+            Transition fade = TransitionInflater.from(MainActivity.this)
+                    .inflateTransition(R.transition.slide_right);
+            // Iniciar la transición desde el anterior layout
+            TransitionManager.beginDelayedTransition(findViewById(R.id.guidePersonajesLayout), fade);
 
-        scaleX.setRepeatCount(3);
-        scaleY.setRepeatCount(3);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1000);
-        animatorSet.start();
 
-        animatorSet.addListener((new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (needToStartGuide) {
-                    super.onAnimationEnd(animation);
+            mundosBinding.nextToColeccionables.setOnClickListener(this::initalizeColeccionables);
+            mundosBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
-                    mundosBinding.pulseImage.setVisibility(VISIBLE);
-                    mundosBinding.textStep.setVisibility(VISIBLE);
+            positionPulse(23, 0);
+
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(
+                    mundosBinding.pulseImage, "scaleX", .5f, 1f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(
+                    mundosBinding.pulseImage, "scaleY", .5f, 1f);
+            ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
+                    mundosBinding.textStep, "alpha", 0f, 1f);
+
+            scaleX.setRepeatCount(3);
+            scaleY.setRepeatCount(3);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(scaleX).with(scaleX).before(fadeIn);
+            animatorSet.setDuration(1000);
+            animatorSet.start();
+
+            animatorSet.addListener((new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (needToStartGuide) {
+                        super.onAnimationEnd(animation);
+
+                        mundosBinding.pulseImage.setVisibility(VISIBLE);
+                        mundosBinding.textStep.setVisibility(VISIBLE);
+                    }
                 }
-            }
-        }));
+            }));
+        }
     }
 
 
@@ -337,53 +346,53 @@ public class MainActivity extends AppCompatActivity {
             chkColecciones.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 preferencesGuide.setPreferencesColecciones(isChecked);
             });
-        }
 
 
-        navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
-        mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
-        coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
+            navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles
+            mundosBinding.getRoot().setVisibility(GONE);//ocultamos guide del que viene
+            coleccionablesBinding.getRoot().setVisibility(VISIBLE);//hacemos visible la guide a la que llegamos
 
-        soundCambioFragment();//reproducir sonido
-
-
-        positionPulse(.5f, .30f);
-
-        // Cargar la transición desde el recurso XML
-        Transition fade = TransitionInflater.from(MainActivity.this)
-                .inflateTransition(R.transition.slide_left);
-        // Iniciar la transición desde el anterior layout
-        TransitionManager.beginDelayedTransition(findViewById(R.id.guideMundosLayout), fade);
-
-        coleccionablesBinding.nextToResumen.setOnClickListener(this::initalizeInfo);
-        coleccionablesBinding.exitGuide.setOnClickListener(this::onExitGuide);
+            soundCambioFragment();//reproducir sonido
 
 
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                coleccionablesBinding.pulseImage, "scaleX", 1f, .5f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                coleccionablesBinding.pulseImage, "scaleY", 1f, .5f);
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
-                coleccionablesBinding.textStep, "alpha", 0f, 1f);
+            positionPulse(.5f, .30f);
 
-        scaleX.setRepeatCount(3);
-        scaleY.setRepeatCount(3);
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(scaleX).with(scaleX).before(fadeIn);
-        animatorSet.setDuration(1000);
-        animatorSet.start();
+            // Cargar la transición desde el recurso XML
+            Transition fade = TransitionInflater.from(MainActivity.this)
+                    .inflateTransition(R.transition.slide_left);
+            // Iniciar la transición desde el anterior layout
+            TransitionManager.beginDelayedTransition(findViewById(R.id.guideMundosLayout), fade);
 
-        animatorSet.addListener((new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                if (needToStartGuide) {
-                    super.onAnimationEnd(animation);
+            coleccionablesBinding.nextToResumen.setOnClickListener(this::initalizeInfo);
+            coleccionablesBinding.exitGuide.setOnClickListener(this::onExitGuide);
 
-                    coleccionablesBinding.pulseImage.setVisibility(VISIBLE);
-                    coleccionablesBinding.textStep.setVisibility(VISIBLE);
+
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(
+                    coleccionablesBinding.pulseImage, "scaleX", 1f, .5f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(
+                    coleccionablesBinding.pulseImage, "scaleY", 1f, .5f);
+            ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
+                    coleccionablesBinding.textStep, "alpha", 0f, 1f);
+
+            scaleX.setRepeatCount(3);
+            scaleY.setRepeatCount(3);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(scaleX).with(scaleX).before(fadeIn);
+            animatorSet.setDuration(1000);
+            animatorSet.start();
+
+            animatorSet.addListener((new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (needToStartGuide) {
+                        super.onAnimationEnd(animation);
+
+                        coleccionablesBinding.pulseImage.setVisibility(VISIBLE);
+                        coleccionablesBinding.textStep.setVisibility(VISIBLE);
+                    }
                 }
-            }
-        }));
+            }));
+        }
     }
 
     private void initalizeInfo(View view) {

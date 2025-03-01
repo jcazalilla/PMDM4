@@ -88,7 +88,7 @@
         android:layout_width="249dp"
         android:layout_height="52dp"
         android:layout_margin="42dp"
-        android:background="@drawable/boton"
+        android:background="@drawable/boton_next"
         android:fontFamily="@font/bashemath"
         android:gravity="center"
         android:text="@string/comenzar_guia"

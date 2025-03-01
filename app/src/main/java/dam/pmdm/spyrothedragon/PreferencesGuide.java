@@ -27,20 +27,20 @@ public class PreferencesGuide {
     //==============================================================================
     //métodos setter que guardan estado de las preferencias
     //==============================================================================
-    public void setPreferencesPersonajes(boolean isCheckedPersonajes) {
-        editor.putBoolean(KEY_PERSONAJES, isCheckedPersonajes);
+    public void setPreferencesPersonajes(boolean isChecked) {
+        editor.putBoolean(KEY_PERSONAJES, isChecked);
 
         editor.apply();
     }
 
-    public void setPreferencesMundos(boolean isCheckedMundos) {
-        editor.putBoolean(KEY_PERSONAJES, isCheckedMundos);
+    public void setPreferencesMundos(boolean isChecked) {
+        editor.putBoolean(KEY_PERSONAJES, isChecked);
 
         editor.apply();
     }
 
-    public void setPreferencesColecciones(boolean isCheckedColecciones) {
-        editor.putBoolean(KEY_PERSONAJES, isCheckedColecciones);
+    public void setPreferencesColecciones(boolean isChecked) {
+        editor.putBoolean(KEY_PERSONAJES, isChecked);
 
         editor.apply();
     }

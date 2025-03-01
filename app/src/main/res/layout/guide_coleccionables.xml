@@ -8,7 +8,7 @@
     android:background="@color/blue_transparent"
     android:clickable="true"
     android:focusable="true"
-    android:visibility="visible">
+    android:visibility="gone">
 
 
     <android.widget.Button
@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="72dp"
         android:layout_marginTop="159dp"
-        android:background="@color/red"
+        android:background="@drawable/boton_exit"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
         android:textColor="@color/white" />
@@ -32,7 +32,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="159dp"
         android:layout_marginEnd="50dp"
-        android:background="@color/white"
+        android:background="@drawable/boton_next"
         android:text="@string/siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black" />
@@ -43,8 +43,9 @@
         android:layout_height="204dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="239dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="212dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"

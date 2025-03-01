@@ -1,52 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/guideInfoLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_transparent"
-    android:fitsSystemWindows="false"
     android:clickable="true"
     android:focusable="true"
     android:visibility="gone">
 
     <ImageView
         android:id="@+id/pulseImage"
-        android:layout_width="83dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="284dp"
-        android:layout_marginBottom="596dp"
-        android:src="@drawable/arrow_top_right_thin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="119dp"
+        android:layout_height="189dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-47dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/arrow_top_right_thin" />
 
     <TextView
         android:id="@+id/textStep"
         android:layout_width="206dp"
         android:layout_height="124dp"
-        android:layout_marginTop="48dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="43dp"
         android:alpha="0"
         android:background="@drawable/fondo_textview"
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/info_desarrollador"
         android:textColor="@color/black"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.736"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="22sp" />
 
     <android.widget.Button
         android:id="@+id/exitGuide"
         android:layout_width="125dp"
         android:layout_height="46dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="364dp"
-        android:background="@color/red"
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginBottom="333dp"
+        android:background="@drawable/boton_exit"
         android:text="@string/salir_de_la_guia"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -59,15 +57,13 @@
         android:id="@+id/nextToResumen"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top|end"
-        android:layout_marginTop="364dp"
-        android:background="@color/white"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="335dp"
+        android:background="@drawable/boton_next"
         android:text="@string/siguiente"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
