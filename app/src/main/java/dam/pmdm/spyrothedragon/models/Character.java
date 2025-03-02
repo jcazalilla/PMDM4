@@ -5,6 +5,8 @@ public class Character {
     private String description;
     private String image;
 
+
+
     // Getters y setters
     public String getName() {
         return name;
