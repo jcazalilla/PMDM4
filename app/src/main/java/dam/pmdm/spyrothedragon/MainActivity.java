@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
         infoBinding = binding.guideInfoLayout;
         resumenBinding = binding.guideResumenLayout;
 
+        //instanciamos las preferencias de cada guia
+        preferencesGuide = new PreferencesGuide(this);
+        preferencesGuide = new PreferencesGuide(this);
+        preferencesGuide = new PreferencesGuide(this);
+
 
         setContentView(binding.getRoot());
 
@@ -175,16 +180,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeGuide() {
 
-        preferencesGuide = new PreferencesGuide(this);
+        preferencesGuide = new PreferencesGuide(getApplicationContext());
         getSupportActionBar().hide();//oculta ActionBar
         if (preferencesGuide.getKeyColecciones() == true
                 && preferencesGuide.getKeyMundos() == true
                 && preferencesGuide.getKeyPersonajes() == true) {
             onExitGuide(getCurrentFocus());
+        } else {
+            bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
+            bienvenidaBinding.getRoot().setVisibility(VISIBLE);
         }
-        bienvenidaBinding.btncomenzarGuide.setOnClickListener(this::initializePersonajes);
-        bienvenidaBinding.getRoot().setVisibility(VISIBLE);
-
     }
 
 
@@ -192,19 +197,17 @@ public class MainActivity extends AppCompatActivity {
     private void initializePersonajes(View view) {
 
         //comprobamos que se haya visualizado la guide en este punto
-        preferencesGuide = new PreferencesGuide(this);
         CheckBox chkPersonajes = findViewById(R.id.chkPersonajes);
+
+        chkPersonajes.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            preferencesGuide.setPreferencesPersonajes(isChecked);
+        });
 
         if (preferencesGuide.getKeyPersonajes() == true) {
             initalizeMundos(view);
         } else {
-
             chkPersonajes.setChecked(true);
-            //guardamos el cambio de estado a true del checbox en preferencias
-            chkPersonajes.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                preferencesGuide.setPreferencesPersonajes(isChecked);
-            });
-
+            preferencesGuide.setPreferencesPersonajes(true);
 
             bienvenidaBinding.getRoot().setVisibility(GONE);
 
@@ -268,20 +271,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void initalizeMundos(View view) {
 
-
         //comprobamos que se haya visualizado la guide en este punto
-        preferencesGuide = new PreferencesGuide(this);
         CheckBox chkMundos = findViewById(R.id.chkMundos);
-        Boolean chk = preferencesGuide.getKeyMundos();
+
+        chkMundos.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            preferencesGuide.setPreferencesMundos(isChecked);
+        });
 
         if (preferencesGuide.getKeyMundos() == true) {
             initalizeColeccionables(view);
         } else {
             chkMundos.setChecked(true);
-            //guardamos el cambio de estado a true del checbox en preferencias
-            chkMundos.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                preferencesGuide.setPreferencesMundos(isChecked);
-            });
+            preferencesGuide.setPreferencesMundos(true);
 
 
             navController.navigate(R.id.navigation_worlds);//Mostramos por debajo el fragment worlds
@@ -335,17 +336,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         //comprobamos que se haya visualizado la guide en este punto
-        preferencesGuide = new PreferencesGuide(this);
         CheckBox chkColecciones = findViewById(R.id.chkColecciones);
+
+        chkColecciones.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            preferencesGuide.setPreferencesColecciones(isChecked);
+        });
+
 
         if (preferencesGuide.getKeyColecciones() == true) {
             onExitGuide(view);
         } else {
             chkColecciones.setChecked(true);
-            //guardamos el cambio de estado a true del checbox en preferencias
-            chkColecciones.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                preferencesGuide.setPreferencesColecciones(isChecked);
-            });
+            preferencesGuide.setPreferencesColecciones(true);
 
 
             navController.navigate(R.id.navigation_collectibles);//mostramos el fragment collectibles

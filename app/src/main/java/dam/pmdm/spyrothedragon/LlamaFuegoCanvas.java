@@ -17,27 +17,23 @@ public class LlamaFuegoCanvas extends View {
     private Paint paint;
     private Bitmap bitmap;
 
+
     public LlamaFuegoCanvas(Context context) {
         super(context);
-
     }
 
-    private void init() {
-
-        paint = new Paint();
-        paint.setAntiAlias(true); // Suavizado de bordes
-        setBackgroundColor(Color.TRANSPARENT);
-    }
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.llama_azul);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.flame);
+
 
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 800, 500, true);
         canvas.drawBitmap(scaledBitmap, 0, 0, paint);
 
+        
     }
 
 

@@ -2,6 +2,8 @@ package dam.pmdm.spyrothedragon;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.widget.CheckBox;
 
 public class PreferencesGuide {
 
@@ -27,20 +29,22 @@ public class PreferencesGuide {
     //==============================================================================
     //métodos setter que guardan estado de las preferencias
     //==============================================================================
+
     public void setPreferencesPersonajes(boolean isChecked) {
         editor.putBoolean(KEY_PERSONAJES, isChecked);
 
         editor.apply();
+        Log.d("PreferencesGuide", "Personajes guardados: " + isChecked);
     }
 
     public void setPreferencesMundos(boolean isChecked) {
-        editor.putBoolean(KEY_PERSONAJES, isChecked);
+        editor.putBoolean(KEY_MUNDOS, isChecked);
 
         editor.apply();
     }
 
     public void setPreferencesColecciones(boolean isChecked) {
-        editor.putBoolean(KEY_PERSONAJES, isChecked);
+        editor.putBoolean(KEY_COLECCIONES, isChecked);
 
         editor.apply();
     }
@@ -49,7 +53,10 @@ public class PreferencesGuide {
     //métodos getters para recuperar estado de la preferencia
     //================================================================================
     public boolean getKeyPersonajes() {
-        return sharedPreferences.getBoolean(KEY_PERSONAJES, false);
+        Boolean value;
+        value= sharedPreferences.getBoolean(KEY_PERSONAJES, false);
+        Log.d("PreferencesGuide", "Personajes recuperados: " + value);
+        return value;
     }
 
     public boolean getKeyMundos() {
