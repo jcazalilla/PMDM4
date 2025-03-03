@@ -25,7 +25,7 @@ Para esta guia se crean principalmente 3 layouts, uno para cada pantalla mencion
 encima de la correspondiente pantalla y de forma semitransparente. En cada uno de estos layouts se añaden 2 botones, 
 uno para pasar a la siguiente pantalla de la guia y otro para abandonarla e irse al juego de forma directa.
 
-
+***
 ### Elementos que se usan en el código
 
 #### __Transiciones:__ 
@@ -37,7 +37,8 @@ Para llamar la atención del usuario sobre elementos como son los botones del Bo
 #### __Drawables:__ 
 Ya sean formas _shape_ en código xml o mediante imágenes "PNG" para dar un estilo diferente a botones.
 
-#### __Efectos de sonido:__ en los botones de la guia.
+#### __Efectos de sonido:__
+En los botones de la guia.
 
 #### __Mostrar videos:__ 
 Mediante la técnica _Easter Egg_. Como elemento oculto y visualizarlo tras un número determianado de pulsaciones en la pantalla sobre un elemento del Recyclerview
