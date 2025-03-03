@@ -15,21 +15,23 @@ uno para pasar a la siguiente pantalla de la guia y otro para abandonarla e irse
 
 ### Elementos que se usan en el código
 
-· __Transiciones:__ para pasar de una pantalla de la guia a la siguiente.
+#### __Transiciones:__ 
+Para pasar de una pantalla de la guia a la siguiente.
 
-· __Animaciones:__ para llamar la atención del usuario sobre elementos como son los botones del BottomNavigation.
+#### __Animaciones:__ 
+Para llamar la atención del usuario sobre elementos como son los botones del BottomNavigation.
 
-· __Drawables:__ ya sean formas _shape_ en código xml o mediante imágenes "png" para dar un estilo diferente a botones.
+#### __Drawables:__ 
+Ya sean formas _shape_ en código xml o mediante imágenes "PNG" para dar un estilo diferente a botones.
 
-· __Efectos de sonido:__ en los botones de la guia.
+#### __Efectos de sonido:__ en los botones de la guia.
 
-· __Mostrar videos:__ mediante la técnica _Easter Egg_. Como elemento oculto y visualizarlo tras un número determianado de pulsaciones.
-  en la pantalla sobre un elemento del Recyclerview
+#### __Mostrar videos:__ 
+Mediante la técnica _Easter Egg_. Como elemento oculto y visualizarlo tras un número determianado de pulsaciones en la pantalla sobre un elemento del Recyclerview
   
-· __Canvas:__ para dibujar animación, activada al hacer pulsación prolongada sobre el item del Recycleview "Spyro".
+#### __Canvas:__ 
+Para dibujar animación, activada al hacer pulsación prolongada sobre el item del Recycleview "Spyro".
 
 
-Si la guia ha sido visualizada ya, esta opción se guardará en *SharedPrefereces* para saltársela al arrancar de nuevo el juego en las
-
-siguientes veces.
+Si la guia ha sido visualizada ya, esta opción se guardará en *SharedPrefereces* para saltársela al arrancar de nuevo el juego en las siguientes veces.
 
