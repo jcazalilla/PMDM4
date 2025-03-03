@@ -49,4 +49,25 @@ Para dibujar animación, activada al hacer pulsación prolongada sobre el item d
 
 Si la guia ha sido visualizada ya, esta opción se guardará en *SharedPrefereces* para saltársela al arrancar de nuevo el juego en las siguientes ocasiones.
 
+***
 
+### Ejemplo de la pantalla de bienvenida, comienzo de la guia.
+
+![image](https://github.com/user-attachments/assets/a8d03d30-b7eb-47c1-b882-a710f72ed755) 
+
+
+### Ejemplo de la pantalla guia Mundos, por debajo situada en la misma opción.
+
+![image](https://github.com/user-attachments/assets/ef9adc37-b1d9-41eb-a671-e3690e5d51d9)
+
+### Visualzación de un video, activado por Easter Egg
+
+![image](https://github.com/user-attachments/assets/7ac13d1f-d6cf-40f8-a109-b1c79c4cc56b)
+
+
+***
+## Conclusión
+
+Todas las técnicas usadas y aunque es un ejemplo sencillo sirven para dar una mejor experiencia de usuario. Proporcionan mejor usabilidad, nuestra aplicación puede llegar a ser mejor valorada y llegar con esto a más número de dispositivos donde se intale.
+
+***
